@@ -3,6 +3,8 @@ import SearchForm from './SearchForm'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import apiConf from '../apiConfig'
+import Bg from '../assets/Group.png'
+
 
 const HeaderContainer = styled.div` 
   height:192px ;
@@ -10,7 +12,7 @@ const HeaderContainer = styled.div`
   flex-direction:column ;
   align-items:center ;
   justify-content:flex-end ;
-  background-image: radial-gradient(circle at 53.46% -21.35%, rgba(5, 112, 172, 0.46) 0%, rgba(8, 27, 35, 0) 100%);
+  background-image: url(${Bg}),radial-gradient(circle at 53.46% -21.35%, rgba(5, 112, 172, 0.46) 0%, rgba(8, 27, 35, 0) 100%);
   @media (min-width:460px){
   background-repeat:repeat;
   background-position:50%;
