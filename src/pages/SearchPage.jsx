@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useLoaderData, useLocation, useNavigate, useParams } from 'react-router-dom'
 import apiConf from '../apiConfig'
 import ReactPaginate from 'react-paginate'
+import MovieCard from '../components/MovieCard'
+import {Content, MoviesFlexBox, MoviesWrapper, Title,TitleWrapper} from './Home'
 
 
 const SearchPage = () => {
@@ -31,31 +33,39 @@ const SearchPage = () => {
         
   }
   return (
-    <div>
+    <Content>
+      <TitleWrapper>
+        <Title>
+          Results for {search}
+        </Title>
+      </TitleWrapper>
+      <MoviesWrapper>
+      <MoviesFlexBox>
       {searchMovies.map(movie =>(
-        <div key={movie.id}>
-          {movie.title}
-          </div>
+          <MovieCard movie={movie} key={movie.id}/>
       ))}
+      </MoviesFlexBox>
       <ReactPaginate
-  nextLabel={">>"}
-  breakLabel={"..."}
-  pageCount={totalPages}
-  marginPagesDisplayed={0}
-  pageRangeDisplayed={3}
-  onPageChange={handlePageClick}
-  containerClassName={"pagination justify-content-center"}
-  pageClassName={"page-item"}
-  pageLinkClassName={"page-link"}
-  previousClassName={"page-item"}
-  previousLinkClassName={"page-link"}
-  nextClassName={"page-item"}
-  nextLinkClassName={"page-link"}
-  breakLinkClassName={"page-link"}
-  activeClassName={"active"}
-  forcePage={currentPage-1}
-/>
-    </div>
+        nextLabel={">>"}
+        previousLabel={"<<"}
+        breakLabel={"..."}
+        pageCount={totalPages}
+        marginPagesDisplayed={0}
+        pageRangeDisplayed={3}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination justify-content-center"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+        breakLinkClassName={"page-link"}
+        activeClassName={"active"}
+        forcePage={currentPage-1}
+      />
+      </MoviesWrapper>
+    </Content>
   )  
 }
 
@@ -65,9 +75,7 @@ export const searchMoviesLoader = async({params}) =>{
   const search=params.search
   const currentPage=params.page
 
-  console.log(params);
   const response = await fetch(apiConf.baseUrl + 'search/movie' + apiConf.apiKey + '&query=' + search + '&page='+ currentPage)
    const data = await response.json()
-   console.log(data)
   return data
 }

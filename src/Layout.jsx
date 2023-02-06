@@ -1,13 +1,13 @@
 import React from 'react'
-import SearchForm from './components/SearchForm'
 import { Outlet, useLocation } from 'react-router-dom'
+import Header from './components/Header'
 
 const Layout = () => {
   const location = useLocation()
-  console.log(location)
   return (
     <>
-    <SearchForm/>
+    {/* <SearchForm/> */}
+    <Header/>
     <Outlet context={{hello:"world"}}/>
     </>
   )
