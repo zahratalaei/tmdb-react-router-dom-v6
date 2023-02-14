@@ -22,7 +22,7 @@ border:none ;
 cursor: pointer;
 `
 const Backdrop = styled.div` 
-height:245px ;
+height:50vh ;
 left:0 ;
 right:0 ;
 top:0 ;
@@ -37,7 +37,7 @@ display:flex ;
 flex-direction: row ;
 font-family: 'Montserrat', sans-serif;
 position: absolute;
-top: 179px;
+top: 45vh;
 left:20px ;
 `
 const MoviePoster = styled.div` 
@@ -115,7 +115,7 @@ const MoviePage = () => {
           <Details>
               <Title>{movie.title}</Title>
               <div>
-              <p><span id='year'>{movie.release_date ? format(new Date(movie.release_date),"Y"):'invalid date'} </span> . <span>{movie.vote_average * 10}%  User Score</span></p>
+              <p><span id='year'>{movie.release_date ? format(new Date(movie.release_date),"Y"):'invalid date'} </span> . <span>{Math.round(movie.vote_average * 10)}%  User Score</span></p>
               <p><span id='hour'> {Math.floor(movie.runtime/60)}h</span><span id='second'> {movie.runtime %60}min</span></p>
               </div>
           </Details> 
