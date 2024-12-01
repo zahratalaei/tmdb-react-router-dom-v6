@@ -57,7 +57,7 @@ const MovieCard = ({movie}) => {
      <Poster src={movie.poster_path ? apiConf.w500Image(movie.poster_path): defaultMovie} alt="" className='poster' />
      <MovieTitle className='card-title' >{movie.title}</MovieTitle>
      <YearDate>{movie.release_date && new Date(movie.release_date) ? format(new Date(movie.release_date),"MMMM yyyy"):''}</YearDate> 
-     <Rate id="rate" >{movie.vote_average * 10}%</Rate>
+     <Rate id="rate" >{(movie.vote_average * 10).toFixed(1)}%</Rate>
      </Link>
    </CardContainer>
   )

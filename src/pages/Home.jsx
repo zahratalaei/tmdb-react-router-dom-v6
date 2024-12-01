@@ -105,7 +105,7 @@ const Home = () => {
 export default Home
  
 export const moviesLoader = async({params}) => {
-  const currentPage = params.page;
+  const currentPage = params.page || 1;
   
   const res = await fetch(apiConf.baseUrl + 'movie/popular' + apiConf.apiKey + '&page=' + currentPage)
   const data = await res.json()
