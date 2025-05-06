@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link,useLoaderData,useNavigate,useNavigation,useParams, useSearchParams } from 'react-router-dom';
-import apiConf from '../apiConfig';
+import apiConf from '../api/apiConfig';
 import backIcon from '../assets/TMDB.png';
 import format from 'date-fns/format';
 import styled from 'styled-components';

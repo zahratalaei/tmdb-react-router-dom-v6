@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLoaderData, useLocation, useNavigate, useParams } from 'react-router-dom'
-import apiConf from '../apiConfig'
+import apiConf from '../api/apiConfig'
 import ReactPaginate from 'react-paginate'
 import MovieCard from '../components/MovieCard'
 import {Content, MoviesFlexBox, MoviesWrapper, Title,TitleWrapper} from './Home'
@@ -9,7 +9,7 @@ import {Content, MoviesFlexBox, MoviesWrapper, Title,TitleWrapper} from './Home'
 const SearchPage = () => {
   const navigate = useNavigate()
   const data = useLoaderData()
-  const searchMovies = data.results
+  const searchMovies = data.results || []
   const location = useLocation()
   
   const {search} = useParams()
@@ -73,9 +73,16 @@ export default SearchPage
 //LoaderFunction
 export const searchMoviesLoader = async({params}) =>{
   const search=params.search
-  const currentPage=params.page
+  const currentPage=params.page || 1
+  const url = `${apiConf.baseUrl}search/movie${apiConf.apiKey}&query=${encodeURIComponent(
+    search
+  )}&page=${currentPage}`;
 
-  const response = await fetch(apiConf.baseUrl + 'search/movie' + apiConf.apiKey + '&query=' + search + '&page='+ currentPage)
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Failed to fetch search results.");
+  }
+  // const response = await fetch(apiConf.baseUrl + 'search/movie?' + apiConf.apiKey + '&query=' + encodeURIComponent(search) + '&page='+ currentPage)
    const data = await response.json()
   return data
 }

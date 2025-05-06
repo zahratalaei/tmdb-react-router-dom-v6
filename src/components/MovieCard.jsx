@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import apiConf from '../apiConfig'
+import apiConf from '../api/apiConfig'
 import styled from'styled-components'
 import format from 'date-fns/format'
 import defaultMovie from '../assets/defaultMovie.png'

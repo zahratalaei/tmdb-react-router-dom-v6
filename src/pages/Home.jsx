@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
-import apiConf from '../apiConfig'
+import apiConf from '../api/apiConfig'
 import styled from 'styled-components'
 import MovieCard from '../components/MovieCard'
 import ReactPaginate from 'react-paginate'

@@ -2,7 +2,7 @@ import React from 'react'
 import SearchForm from './SearchForm'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import apiConf from '../apiConfig'
+import apiConf from '../api/apiConfig'
 import Bg from '../assets/Group.png'
 
 
