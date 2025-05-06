@@ -43,10 +43,7 @@ const Header = () => {
      <SearchForm/>
 
      </HeaderContainer>
-     {/* <NavLink to="/"style={({isActive})=>{
-          return isActive ?{color:'red'}:{}
-
-     }}>Home</NavLink><br/> */}
+    
     </div>
   )
 }

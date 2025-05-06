@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import {useSearchParams, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import {useLocation, useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 const SearchInputs = styled.div` 
     display: flex;
@@ -46,12 +46,20 @@ const SearchButton =styled.button`
 `
 
 const SearchForm = () => {
-  const[searchParams, setSearchParams] = useSearchParams({search:''})
   const [searchValue,setSearchValue] = useState('')
-  const search = searchParams.get('search')
-
   const navigate = useNavigate()
-  
+  const location = useLocation()
+  const params = useParams()
+  console.log(location.pathname)
+  useEffect(() => {
+    if (location.pathname.startsWith("/search") && params.search) {
+      setSearchValue(params.search);
+    }
+  }, [location.pathname, params.search]);
+
+  useEffect(() => {
+    if(location.pathname == '/') setSearchValue('')
+  },[location.pathname])
   const onClickSearch = (e) => {
     const search = searchValue
 
@@ -60,16 +68,7 @@ const SearchForm = () => {
        '/search/'+search,
         {state:{search:search},
       })
-      
-      //pass search using string query
-      // navigate({
-      //   pathname:'/search/'+search,
-      //   state:{search:search},
-      //   // search:'?search='+search 
-      // })
-      
-
-    }
+  }
 
   return (
     <SearchInputs>
@@ -79,15 +78,11 @@ const SearchForm = () => {
       value={searchValue}
       name='search'
       onChange={(e)=>setSearchValue(e.target.value)}/>
-      <SearchButton type='submit' onClick={onClickSearch}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-</svg></SearchButton>
-     
-     {/* <NavLink to="/"style={({isActive})=>{
-          return isActive ?{color:'red'}:{}
-
-     }}>Home</NavLink><br/> */}
-     {/* <Link to={`/movie`}>movie</Link> */}
+      <SearchButton type='submit' onClick={onClickSearch}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+      </SearchButton>
     </SearchInputs>
   )
 }
