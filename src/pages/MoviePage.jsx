@@ -134,7 +134,7 @@ export default MoviePage
 
 export const movieLoader = async ({params}) => {
   const {id} = params;
-  const response = await fetch(apiConf.baseUrl + '/movie/' + id + apiConf.apiKey);
+  const response = await fetch(apiConf.baseUrl + 'movie/' + id + apiConf.apiKey);
   const data = await response.json();
   return data;
 
