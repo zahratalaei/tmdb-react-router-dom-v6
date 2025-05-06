@@ -7,6 +7,7 @@ import './App.css'
 import GlobalFonts from './fonts/fonts'
 import MovieLayout from './MovieLayout'
 import RootLayout from './RootLayout'
+import FilterPage, { filterLoader } from './pages/FilterPage'
 
 
 const router = createBrowserRouter(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
         <Route path='/:page' element={<Home />} loader={moviesLoader}/>
         {/* <Route path="/search" element={<SearchPage />} loader={searchMoviesLoader} /> */}
         {/* <Route path="/search" element={<SearchPage />} loader={searchMoviesLoader} /> */}
+        <Route  path="/filter"  element={<FilterPage />}  loader={filterLoader}/>
         <Route path="/search/:search" element={<SearchPage />} loader={searchMoviesLoader} />
         <Route path="/search/:search/:page" element={<SearchPage />} loader={searchMoviesLoader} />
         <Route path="/:page" element={<Home />} />

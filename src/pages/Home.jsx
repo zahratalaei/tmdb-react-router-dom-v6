@@ -4,6 +4,7 @@ import apiConf from '../api/apiConfig'
 import styled from 'styled-components'
 import MovieCard from '../components/MovieCard'
 import ReactPaginate from 'react-paginate'
+import Filters from '../components/Filters'
 
 
 export const Title = styled.h1`
@@ -68,6 +69,7 @@ const Home = () => {
   
   return (
     <Content>
+      <Filters/>
       <TitleWrapper>
         <Title>Popular Movies</Title>
       </TitleWrapper>

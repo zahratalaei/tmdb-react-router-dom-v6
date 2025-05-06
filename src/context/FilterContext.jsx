@@ -1,12 +1,16 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 const FilterContext = createContext()
-const initialState = {
-    genre:"",
-    year:"",
-    sortedBy:"popularity.desc",
-}
 
+const initialState = {
+    genre: "",
+    year: "",
+    sortBy: "popularity.desc",
+    language: "",
+    adult: "false",
+    rate: ""
+  };
+  
 function filterReducer(state,action){
     switch(action.type){
         case "SET_GENRE":
@@ -15,6 +19,12 @@ function filterReducer(state,action){
             return {...state,year:action.payload}
         case "SET_SORTED_BY":
             return {...state,sortedBy:action.payload}
+        case "SET_ADULT":
+            return { ...state, adult: action.payload };
+        case "SET_RATE":
+            return { ...state, rate: action.payload };
+        case "SET_LANGUAGE":
+            return { ...state, language: action.payload };
         default:
             return state
     }
