@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useFilters } from "../context/FilterContext";
 import apiConf from "../api/apiConfig";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 const FilterContainer = styled.div`
   display: grid;
@@ -65,6 +65,18 @@ const Filters = () => {
   const { state, dispatch } = useFilters();
   const [genres, setGenres] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation()
+  useEffect(() => {
+    if(location.pathname == '/'){
+      dispatch({ type: "SET_GENRE", payload: "" });
+      dispatch({ type: "SET_YEAR", payload: "" });
+      dispatch({ type: "SET_SORT", payload: "popularity.desc" });
+      dispatch({ type: "SET_LANGUAGE", payload: "" });
+      dispatch({ type: "SET_ADULT", payload: "false" });
+      dispatch({ type: "SET_RATE", payload: "" });
+      dispatch({ type: "SET_QUERY", payload: "" });
+    }
+  },[location.pathname])
   useEffect(() => {
     fetch(`${apiConf.baseUrl}genre/movie/list${apiConf.apiKey}`)
       .then((res) => res.json())
@@ -85,6 +97,11 @@ const Filters = () => {
 
   const handleApply = () => {
     const params = new URLSearchParams();
+    
+  if (state.query && state.query.trim() !== "") {
+    params.set("query", state.query);
+  }
+
     if (state.genre) params.set("genre", state.genre);
     if (state.year) params.set("year", state.year);
     if (state.sortBy) params.set("sort_by", state.sortBy);
@@ -174,6 +191,12 @@ const Filters = () => {
         />
         Adult Content
       </CheckboxWrapper>
+      <Input
+  type="text"
+  placeholder="Search..."
+  value={state.query}
+  onChange={(e) => dispatch({ type: "SET_QUERY", payload: e.target.value })}
+/>
       <ApplyButton onClick={handleApply}>Apply</ApplyButton>
     </FilterContainer>
   );

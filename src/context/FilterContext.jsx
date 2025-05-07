@@ -8,7 +8,8 @@ const initialState = {
     sortBy: "popularity.desc",
     language: "",
     adult: "false",
-    rate: ""
+    rate: "",
+    query:"",
   };
   
 function filterReducer(state,action){
@@ -25,6 +26,8 @@ function filterReducer(state,action){
             return { ...state, rate: action.payload };
         case "SET_LANGUAGE":
             return { ...state, language: action.payload };
+        case "SET_QUERY":
+            return { ...state, query: action.payload };
         default:
             return state
     }

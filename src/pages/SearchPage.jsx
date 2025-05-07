@@ -4,7 +4,7 @@ import apiConf from '../api/apiConfig'
 import ReactPaginate from 'react-paginate'
 import MovieCard from '../components/MovieCard'
 import {Content, MoviesFlexBox, MoviesWrapper, Title,TitleWrapper} from './Home'
-
+import Filters from '../components/Filters'
 
 const SearchPage = () => {
   const navigate = useNavigate()
@@ -34,6 +34,7 @@ const SearchPage = () => {
   }
   return (
     <Content>
+      <Filters/>
       <TitleWrapper>
         <Title>
           Results for {search}
